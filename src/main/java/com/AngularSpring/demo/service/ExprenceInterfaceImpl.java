@@ -18,9 +18,18 @@ public class ExprenceInterfaceImpl implements ExpenceInterface {
 		return res.findAll();
 	}
 
-	@Override
+	@Override//add data or post data
 	public expences updateExp(expences ex) {
 		return res.save(ex);
+		
+	}
+
+	@Override
+	public expences getbyID(Long id) {
+	 if (res.findById(id).isPresent()) {
+		 return res.findById(id).get();
+	 }
+	return null;
 		
 	}
 

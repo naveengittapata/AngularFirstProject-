@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.AngularSpring.demo.model.expences;
@@ -25,20 +26,28 @@ public class ExpenceController {
 	
 	@Autowired
 	ExprenceInterfaceImpl Eempl;
-	
+	//Get the orginal Data 
 	@GetMapping("/exp")
 	public ResponseEntity<List<expences>> allme() {
 		
 		 List<expences> exp= Eempl.getAll();
 		 return new ResponseEntity<List<expences>>(exp,HttpStatus.OK);
 	}
-	
+	//Post the new Data
 	@CrossOrigin
 	@PostMapping("/exp")
 	public ResponseEntity<expences> upexp( @RequestBody expences et) {
 		System.out.println("I am here");
 		expences exp1= Eempl.updateExp(et);
-		return new ResponseEntity<expences>(exp1,HttpStatus.OK); 
+		return new ResponseEntity<expences>(exp1,HttpStatus.OK); }
+		
+   //Get by ID
+	@CrossOrigin
+		@GetMapping("/exp/{id}")
+		public ResponseEntity<expences> getbySpeaficID( @PathVariable("id") Long id) {
+			System.out.println("I am here");
+			expences exp2= Eempl.getbyID(id);
+			return new ResponseEntity<expences>(exp2,HttpStatus.OK); 
 		
 		
 	}
